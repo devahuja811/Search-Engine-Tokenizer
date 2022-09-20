@@ -1,4 +1,3 @@
-lst=["Ph.D."]
-curWord=lst[0].split(".")
-print(curWord)
-
+curWord="Ph.D."
+print(sum(c.isalpha() for c in curWord))
+print(curWord.count('.'))
