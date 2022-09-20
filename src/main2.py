@@ -17,5 +17,5 @@ if __name__=="__main__":
 
             input=["Mr. Bentley", "Ph.D."]
             input= [s.translate(str.maketrans('', '', string.punctuation.replace(".", ""))) for s in input]
-            print("Mr" in input[0])
+            
             

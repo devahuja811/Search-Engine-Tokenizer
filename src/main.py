@@ -50,7 +50,7 @@ if __name__=="__main__":
             initList=["Ph.D.", "Mr. Bentley"]
             initList=[re.sub(r"(?:[A-Z]\.)+", lambda m: callback(m.group()), x) for x in initList ]
             
-
+    
 
             
 
