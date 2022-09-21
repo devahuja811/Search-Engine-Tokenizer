@@ -1,11 +1,14 @@
 import re
-from collections import OrderedDict
+
+# checks if character is a consonant
 def isConsonant(char):
     return char not in "aeiou"
 
+#Implements step 1a of the Porter Stemmer
 def implementStemmerA(wordList):
     for i in range(len(wordList)):
         curWord=wordList[i]
+        #check word ending based on given cases and add appropriate replacement suffixes
         if curWord.endswith("sses"):
             wordList[i]=curWord[:len(curWord)-4]+"ss"
         if curWord.endswith("ied") or curWord.endswith("ies"):
@@ -17,6 +20,7 @@ def implementStemmerA(wordList):
             if len(curWord) >1 and curWord[-2] not in vowels:
                 wordList[i]= curWord[:len(curWord)-1]
     return wordList
+
 def checkVowelPresence(word, endLength, vowels):
     firstVowel=-2
     firstNonVowel=-1
@@ -24,18 +28,12 @@ def checkVowelPresence(word, endLength, vowels):
         if word[i] in vowels:
             firstVowel=i
             break
-    # for index, char in enumerate(word[:endLength]):
-    #     if char in vowels:
-    #         firstVowel=index
-    #         break
+
     for j in range(len(word[:endLength])):
         if word[j] not in vowels and j>firstVowel:
             firstNonVowel=j
             break
-    # for index, char in enumerate(word[:endLength]):
-    #     if char not in vowels and index>firstVowel:
-    #         firstNonVowel=index
-    #         break
+
     return word[:endLength]+"ee" if firstVowel >-1 and firstNonVowel>firstVowel else word        
     
 def CVCV(word):
