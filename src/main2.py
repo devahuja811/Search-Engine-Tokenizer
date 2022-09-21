@@ -1,8 +1,4 @@
-
 import re
-
-
-
 def isConsonant(char):
     return char not in "aeiou"
 
@@ -65,7 +61,7 @@ def implementStemmerB(wordList):
     vowels={"a", "e", "i", "o", "u"}    
     for i in range(len(wordList)):
         curWord=wordList[i]
-        print(curWord)
+
         if (curWord.endswith("eed") or curWord.endswith("eedly")):
             wordList[i] = checkVowelPresence(curWord, len(curWord)-3, vowels) if curWord.endswith("eed") else checkVowelPresence(curWord, len(curWord)-5, vowels)
         elif (curWord.endswith("ed") or curWord.endswith("eedly") or curWord.endswith("ing") or curWord.endswith("ingly")):
@@ -98,7 +94,7 @@ def implementStemmerB(wordList):
 
 # strips input list of all punctuations except apostrophe, commmas, and periods as these are needed for abbreviations and merging
 def splitUsingDelimiters(inputStr):
-    return re.split("[, \-!?:\n () /]+",inputStr)
+    return re.split("[, \-!?:\n () /_]+",inputStr)
 
 #checks for abbreviations and adds to new list accordingly
 def processAbbreviations(inputList):
@@ -139,10 +135,19 @@ if __name__=="__main__":
             afterAbbvs=processAbbreviations(inputList)            
             allLower=[s.lower() for s in afterAbbvs]
             processedList=removeStopWords(allLower, stopWordList)
-            testList=["agreed", "feed","fished", "pirating", "falling", "dripping", "hoping"]
-            # testList=["pirating"]
+
+            stemA=implementStemmerA(processedList)
+            finalList=implementStemmerB(stemA)
             
-            print(implementStemmerB(testList))
+            with open("tokenized-A.txt", 'w') as outfile:
+                for term in finalList:
+                    outfile.write(term+ "\n")
+            
+
+            
+
+
+
 
             
 
