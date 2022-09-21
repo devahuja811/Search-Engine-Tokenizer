@@ -1,4 +1,5 @@
 import re
+from collections import OrderedDict
 def isConsonant(char):
     return char not in "aeiou"
 
@@ -146,16 +147,21 @@ if __name__=="__main__":
             stemA=implementStemmerA(processedList)
             finalList=implementStemmerB(stemA)
             
-            with open("tokenized-B.txt", 'w') as outfile:
-                for term in finalList:
-                    outfile.write(term+ "\n")
+            # with open("tokenized-B.txt", 'w') as outfile:
+            #     for term in finalList:
+            #         outfile.write(term+ "\n")
             wordCounts={}
             for term in finalList:
                 if term in wordCounts:
                     wordCounts[term]+=1
                 else:
                     wordCounts[term]=1
-            
+            sortedWordCounts=sorted(wordCounts.items(), key=lambda kv: kv[1], reverse=True)
+            #sortedWordCounts=OrderedDict(sorted(wordCounts.items(), key=lambda v: v, reverse=True))
+            with open("terms-B.txt", "w", encoding='utf-8-sig') as outfile:
+                for word in list(sortedWordCounts)[:300]:
+                    outfile.write(word[0] +"\n")
+
             
 
             

@@ -89,4 +89,7 @@
             # processAbbreviations(inputList)
 
 dict1={'a':1, 'b':2, '3':4}
-print(sorted(dict.items(), key=lambda kv: kv[1], reverse=True))
+l1= sorted(dict1.items(), key=lambda kv: kv[1], reverse=True)
+print(l1)
+for tup in l1:
+    print(tup[0])
