@@ -23,30 +23,19 @@ def checkVowelPresence(word, endLength, vowels):
         if word[i] in vowels:
             firstVowel=i
             break
-    # for index, char in enumerate(word[:endLength]):
-    #     if char in vowels:
-    #         firstVowel=index
-    #         break
     for j in range(len(word[:endLength])):
         if word[j] not in vowels and j>firstVowel:
             firstNonVowel=j
             break
-    # for index, char in enumerate(word[:endLength]):
-    #     if char not in vowels and index>firstVowel:
-    #         firstNonVowel=index
-    #         break
+
     return word[:endLength]+"ee" if firstVowel >-1 and firstNonVowel>firstVowel else word        
     
 def CVCV(word):
     vowelIndex=-1
     for index, char in enumerate(word):
         if not isConsonant(char) and index!=len(word)-1:
-            
-
             vowelIndex=index
-            break
-
-            
+            break            
     return isConsonant(word[0]) and not isConsonant(word[-1]) and vowelIndex!=-1 and any(word.index(s)>vowelIndex and isConsonant(s) for s in word) 
 
 def CVC(word):
@@ -75,7 +64,6 @@ def implementStemmerB(wordList):
                 if any(s in vowels for s in curWord[:len(curWord)-3]):
                     wordList[i]=curWord[:len(curWord)-3]
             updatedWord=wordList[i]
-
             
             if updatedWord.endswith("at") or updatedWord.endswith("bl") or updatedWord.endswith("iz"):
                 wordList[i]+="e"
@@ -94,7 +82,7 @@ def implementStemmerB(wordList):
 
 # strips input list of all punctuations except apostrophe, commmas, and periods as these are needed for abbreviations and merging
 def splitUsingDelimiters(inputStr):
-    return re.split("[, \-!?:\n () /_ \[\] /{\} \*;\" #]+",inputStr)
+    return re.split("[, \-!?:\n () /_  \* #]+",inputStr)
 
 #checks for abbreviations and adds to new list accordingly
 def processAbbreviations(inputList):
@@ -109,10 +97,9 @@ def processAbbreviations(inputList):
         else:
             if re.search("^([a-zA-Z]\.)+$|^([a-zA-Z]\.)+([a-zA-Z]$)", word): #is an abbreviation
                 resList.append(''.join(word.split(".")))
-            elif "mr." in word.lower() or "mrs." in word.lower():
-                if(i+1)>=len(inputList):
-                    outfile=open("errors.txt", "a")
-                    outfile.write(str(i) + "\n")             
+            elif "mr" in word.lower() or "mrs" in word.lower():
+                
+                print(inputList[i+1])
                 resList.append(word.split(".")[0]+inputList[i+1])
                 inputList[i+1]=None
             else:
@@ -128,16 +115,11 @@ def removeStopWords(inputList, stopWordList):
     return alNumCopy
 
 if __name__=="__main__":
-    with open("tokenization-input-part-B.txt", encoding='utf-8-sig') as tokenFile:
+    with open("tokenization-input-part-B.txt") as tokenFile:
         with open("stopwords.txt") as stopWordFile:
-            inputFile=tokenFile.read()
-            stopWordList= stopWordFile.read().split("\n")
-            #input= "Don't Mr. Bentley Ph.D. U.S.A. A.B.C.'s 200,000 O'Brian"             
-                    
-            inputList=splitUsingDelimiters(inputFile)
-
-            
-            
+            input=tokenFile.read()
+            stopWordList= stopWordFile.read().split("\n")         
+            inputList=splitUsingDelimiters(input)
             inputList=[s.replace("'", "").replace('"', "") for s in inputList]
             afterAbbvs=processAbbreviations(inputList)            
             allLower=[s.lower() for s in afterAbbvs]
@@ -149,13 +131,6 @@ if __name__=="__main__":
             with open("tokenized-B.txt", 'w') as outfile:
                 for term in finalList:
                     outfile.write(term+ "\n")
-            wordCounts={}
-            for term in finalList:
-                if term in wordCounts:
-                    wordCounts[term]+=1
-                else:
-                    wordCounts[term]=1
-            
             
 
             
