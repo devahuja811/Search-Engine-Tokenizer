@@ -1,4 +1,4 @@
-early
+﻿early
 examples
 abbreviation
 english

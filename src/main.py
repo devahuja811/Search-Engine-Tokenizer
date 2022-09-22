@@ -173,8 +173,8 @@ def tokenizeFile(inputFilename, stopWordFilename):
 
 def partA():
     tokenizedList=tokenizeFile("tokenization-input-part-A.txt", "stopwords.txt")
-    for term in tokenizedList:
-        with open("tokenized-A.txt", 'w', encoding='utf-8-sig') as outfile:
+    with open("tokenized-A.txt", 'w', encoding='utf-8-sig') as outfile:
+        for term in tokenizedList:
             outfile.write(term +"\n")
 
 def partB():
@@ -195,6 +195,7 @@ def partB():
 if __name__=="__main__":
     partA()
     partB()
+
 
 
             
