@@ -1,3 +1,5 @@
+from lib2to3.pgen2 import token
+import matplotlib.pyplot as plt
 import re
 
 # checks if character is a consonant
@@ -176,6 +178,7 @@ def partA():
     with open("tokenized-A.txt", 'w', encoding='utf-8-sig') as outfile:
         for term in tokenizedList:
             outfile.write(term +"\n")
+    return tokenizedList
 
 def partB():
     tokenizedList=tokenizeFile("tokenization-input-part-B.txt", "stopwords.txt")
@@ -192,18 +195,34 @@ def partB():
     with open("terms-B.txt", "w", encoding='utf-8-sig') as outfile:
         for word in list(sortedWordCounts)[:300]:
             outfile.write(word[0] +"\n")
+    return tokenizedList
+
+def makeGraph(tokenizedList):
+    ##########################Graphing ######################
+    uniqueWords=set()
+    collectionWordCount=[]
+    uniqueWordCount=[]
+    numUnique=0
+    numSeen=0
+
+    for i in range(len(tokenizedList)):
+        if tokenizedList[i] not in uniqueWords:
+            numUnique+=1
+            uniqueWords.add(tokenizedList[i])
+        numSeen+=1
+        collectionWordCount.append(numSeen)
+        uniqueWordCount.append(numUnique)
+
+    plt.plot(collectionWordCount, uniqueWordCount)
+    plt.xlabel("Words in Collection")
+    plt.ylabel("Words in Vocabulary")
+    plt.title("Vocabulary Growth for Pride and Prejudice")
+    plt.show()
+
 if __name__=="__main__":
     partA()
-    partB()
-
-
-
-            
-
-
-
-
-            
+    graphList= partB() ## return type assigned solely for graphing, no relation to tokenizer
+    makeGraph(graphList)       
 
             
             

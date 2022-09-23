@@ -25,9 +25,9 @@ With the stop words removed, the Porter Stemmer steps are executed. implementSte
 
 All steps are supported with documents in the code. 
 
-**Libraries**: Only the built-in regex library has been used to filter and identify special patterns in the text. 
+**Libraries**: The built-in regex library has been used to filter and identify special patterns in the text. matplotlib's pyplot has been used to plot the graph but it holds no relation to the tokenizing process and is only used for the report.
 
-**Dependencies**: Since there has been no installation of third-party libraries, no installation is required for dependencies. It is, however, important to note that the code must be run on Python versions. The code was developed on Python 3.9.5 so it is recommended that it best be tested on the same version. However, the re library is supported on almost all Python 3+ versions.
+**Dependencies**: Since there has been no installation of third-party libraries, no installation is required for dependencies in tokenizing. However, if the graph needs to be plotted, matplotlib can be installed by the command "pip install matplotlib" if not installed already. This will also require the presence of "pip" on the machine. It is also important to note that the code must be run on Python versions 3 or later. The code was developed on Python 3.9.5 so it is recommended that it best be tested on the same version. However, the re library is supported on almost all Python 3+ versions. 
 
 **Building and Running**: The script is able to compile and run through a single command that is
     python main.py
