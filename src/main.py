@@ -194,7 +194,7 @@ def partB():
     #writing results to output file as required.
     with open("terms-B.txt", "w", encoding='utf-8-sig') as outfile:
         for word in list(sortedWordCounts)[:300]:
-            outfile.write(word[0] +"\n")
+            outfile.write(word[0] + " " + str(word[1])+"\n")
     return tokenizedList
 
 def makeGraph(tokenizedList):
